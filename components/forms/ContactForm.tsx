@@ -3,9 +3,10 @@
 import type { FormEvent, ReactNode } from "react";
 import { buildContactMailto, cn } from "@/lib/utils";
 import { Button } from "@/components/ui/Button";
+import { Icon } from "@/components/ui/Icon";
 
 const inputClasses =
-  "w-full rounded-lg border border-field-line bg-paper px-3 py-[11px] text-xs font-normal outline-none transition-colors focus:border-brand";
+  "w-full rounded-[10px] border border-[#dcc6f14d] bg-white/5 px-[13px] py-3 text-[13px] text-white outline-none transition-colors placeholder:text-white/50 focus:border-[#c79aff] focus:bg-white/8";
 
 type ContactFormProps = {
   email: string;
@@ -27,7 +28,10 @@ export function ContactForm({ email }: ContactFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="grid content-center gap-3 md:grid-cols-2">
+    <form
+      onSubmit={handleSubmit}
+      className="grid gap-3 rounded-[20px] border border-white/18 bg-white/7 p-[18px] backdrop-blur-md md:grid-cols-2 md:p-[23px]"
+    >
       <Field label="Nom">
         <input name="name" type="text" placeholder="Votre nom" autoComplete="name" required className={inputClasses} />
       </Field>
@@ -35,7 +39,7 @@ export function ContactForm({ email }: ContactFormProps) {
         <input
           name="email"
           type="email"
-          placeholder="votre@email.com"
+          placeholder="vous@exemple.com"
           autoComplete="email"
           required
           className={inputClasses}
@@ -44,15 +48,16 @@ export function ContactForm({ email }: ContactFormProps) {
       <Field label="Message" className="md:col-span-2">
         <textarea
           name="message"
-          placeholder="Votre message..."
+          placeholder="Écrivez votre message..."
           required
-          className={cn(inputClasses, "min-h-[95px] resize-y")}
+          className={cn(inputClasses, "min-h-[105px] resize-y")}
         />
       </Field>
       <Button type="submit" className="justify-self-start md:col-span-2">
+        <Icon name="send" />
         Envoyer le message
       </Button>
-      <p className="-mt-[7px] text-[10px] text-muted md:col-span-2">
+      <p className="text-[11px] text-white/55 md:col-span-2">
         Votre application de messagerie s’ouvrira pour envoyer l’email.
       </p>
     </form>
@@ -67,7 +72,7 @@ type FieldProps = {
 
 function Field({ label, children, className }: FieldProps) {
   return (
-    <label className={cn("grid gap-[5px] text-[10px] font-bold", className)}>
+    <label className={cn("grid gap-1.5 text-[11px] text-white/82", className)}>
       {label}
       {children}
     </label>

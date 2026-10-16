@@ -14,7 +14,7 @@ const sizes = {
 
 export function Container({ children, size = "default", className }: ContainerProps) {
   return (
-    <div className={cn("mx-auto w-[calc(100%-30px)] md:w-[calc(100%-44px)]", sizes[size], className)}>
+    <div className={cn("mx-auto w-[calc(100%-32px)] md:w-[calc(100%-48px)]", sizes[size], className)}>
       {children}
     </div>
   );

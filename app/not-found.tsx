@@ -4,8 +4,8 @@ import { Kicker } from "@/components/ui/SectionHeading";
 
 export default function NotFound() {
   return (
-    <Container size="narrow" className="py-24 text-center">
-      <Kicker>Erreur 404</Kicker>
+    <Container size="narrow" className="pb-24 pt-36 text-center">
+      <Kicker className="justify-center">Erreur 404</Kicker>
       <h1 className="my-3 font-serif text-[clamp(40px,6vw,64px)] font-medium leading-[1.1]">
         Cette page est introuvable.
       </h1>

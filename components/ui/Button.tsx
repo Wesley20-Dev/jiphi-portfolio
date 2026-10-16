@@ -5,11 +5,11 @@ import { cn } from "@/lib/utils";
 type Variant = "primary" | "outline-light";
 
 const base =
-  "inline-flex min-h-11 cursor-pointer items-center justify-center rounded-full border border-transparent px-5 text-[11px] font-bold transition duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand";
+  "inline-flex min-h-11 cursor-pointer items-center justify-center gap-2.5 rounded-full border border-transparent px-[18px] text-xs font-bold transition duration-200 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lilac-bright";
 
 const variants: Record<Variant, string> = {
-  primary: "bg-brand text-white hover:-translate-y-px hover:bg-brand-hover",
-  "outline-light": "border-white/70 text-white hover:bg-white/12",
+  primary: "bg-brand text-white shadow-[0_8px_22px_#8750b54d] hover:bg-brand-hover",
+  "outline-light": "border-white/55 bg-white/5 text-white hover:bg-white/12",
 };
 
 export function buttonClasses(variant: Variant = "primary", className?: string) {

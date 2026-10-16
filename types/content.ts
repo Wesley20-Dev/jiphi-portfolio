@@ -1,3 +1,5 @@
+import type { IconName } from "@/components/ui/Icon";
+
 export type NavLink = {
   label: string;
   /** Identifiant de la section sur la page d'accueil (ancre). */
@@ -7,6 +9,12 @@ export type NavLink = {
 export type SocialLink = {
   label: string;
   href: string;
+  icon: IconName;
+};
+
+export type UniverseTag = {
+  label: string;
+  icon: IconName;
 };
 
 export type MediaItem = {
@@ -14,7 +22,8 @@ export type MediaItem = {
   title: string;
   meta: string;
   href: string;
-  image: string;
+  /** Sans image, la carte affiche un dégradé avec le titre. */
+  image?: string;
   imageAlt?: string;
 };
 

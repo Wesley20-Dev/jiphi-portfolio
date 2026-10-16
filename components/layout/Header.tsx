@@ -2,17 +2,33 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { navLinks, sectionIds, siteConfig } from "@/data/site";
 import { useActiveSection } from "@/hooks/useActiveSection";
+import { useIsInView } from "@/hooks/useIsInView";
 import { cn } from "@/lib/utils";
 import { Container } from "@/components/ui/Container";
+import { Icon } from "@/components/ui/Icon";
 
 export function Header() {
   const pathname = usePathname();
   const isHome = pathname === "/";
   const activeSection = useActiveSection(sectionIds, isHome);
+  // Transparent par-dessus le hero de l'accueil, opaque partout ailleurs.
+  const heroInView = useIsInView("accueil", { enabled: isHome, rootMargin: "-80px 0px 0px 0px" });
+  const solid = !isHome || !heroInView;
   const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") setMenuOpen(false);
+    }
+
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [menuOpen]);
 
   function isActive(sectionId: string) {
     if (isHome) return activeSection === sectionId;
@@ -20,29 +36,31 @@ export function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-10 border-b border-line bg-canvas/94 backdrop-blur-md">
-      <Container className="flex h-[66px] items-center justify-between md:h-[74px]">
-        <Link href="/#accueil" className="font-serif text-[31px] font-semibold text-brand">
+    <header
+      className={cn(
+        "fixed inset-x-0 top-0 z-50 text-white transition-[background-color,box-shadow,backdrop-filter] duration-300",
+        solid && "bg-deep/92 shadow-[0_8px_30px_#1a0e2833] backdrop-blur-md",
+      )}
+    >
+      <Container
+        className={cn(
+          "relative flex items-center justify-between gap-6 transition-[height] duration-300",
+          solid ? "h-[64px] md:h-[68px]" : "h-[72px] md:h-[82px]",
+        )}
+      >
+        <Link href="/#accueil" className="font-serif text-[28px] font-medium uppercase leading-[.9] tracking-[.04em] md:text-[31px]">
           {siteConfig.name}
+          <small className="mt-[5px] block font-sans text-[8px] font-bold uppercase leading-[1.7] tracking-[.17em] text-[#d7b9f5]">
+            {siteConfig.tagline}
+          </small>
         </Link>
-
-        <button
-          type="button"
-          className="cursor-pointer text-[26px] text-brand md:hidden"
-          aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
-          aria-expanded={menuOpen}
-          aria-controls="main-menu"
-          onClick={() => setMenuOpen((open) => !open)}
-        >
-          <span aria-hidden="true">{menuOpen ? "✕" : "☰"}</span>
-        </button>
 
         <nav
           id="main-menu"
           aria-label="Navigation principale"
           className={cn(
-            "absolute inset-x-0 top-[66px] flex-col items-start gap-[13px] border-b border-line bg-canvas px-[22px] pb-[22px] pt-[18px]",
-            "md:static md:flex md:flex-row md:items-center md:gap-7 md:border-0 md:bg-transparent md:p-0",
+            "absolute inset-x-0 top-[calc(100%-6px)] flex-col gap-0.5 rounded-2xl border border-white/15 bg-[#1d102cf5] p-3.5 backdrop-blur-[15px]",
+            "md:static md:flex md:flex-row md:items-center md:gap-[clamp(15px,2.2vw,28px)] md:rounded-none md:border-0 md:bg-transparent md:p-0 md:backdrop-blur-none",
             menuOpen ? "flex" : "hidden",
           )}
         >
@@ -55,9 +73,9 @@ export function Header() {
                 aria-current={active ? "page" : undefined}
                 onClick={() => setMenuOpen(false)}
                 className={cn(
-                  "relative py-2 text-xs font-bold text-[#554d5a] transition-colors hover:text-brand",
-                  "after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:origin-left after:scale-x-0 after:rounded-sm after:bg-brand after:transition-transform after:duration-300",
-                  active && "text-brand after:scale-x-100",
+                  "relative rounded-lg p-2.5 text-[13px] font-semibold text-[#e5dce9] transition-colors hover:bg-white/6 hover:text-white md:rounded-none md:px-0 md:text-xs md:hover:bg-transparent",
+                  "md:after:absolute md:after:inset-x-0 md:after:bottom-0.5 md:after:h-0.5 md:after:origin-left md:after:scale-x-0 md:after:bg-lilac-bright md:after:transition-transform md:after:duration-200 md:hover:after:scale-x-100",
+                  active && "bg-white/8 text-white md:bg-transparent md:after:scale-x-100",
                 )}
               >
                 {link.label}
@@ -65,6 +83,25 @@ export function Header() {
             );
           })}
         </nav>
+
+        <Link
+          href="/#contact"
+          className="hidden items-center gap-1.5 whitespace-nowrap rounded-full border border-[#b88ce3] px-[15px] py-2.5 text-[11px] font-bold transition-colors hover:bg-brand lg:inline-flex"
+        >
+          Parlons musique
+          <Icon name="arrow-up-right" />
+        </Link>
+
+        <button
+          type="button"
+          className="grid size-[42px] cursor-pointer place-items-center rounded-full border border-white/35 bg-white/8 text-[21px] md:hidden"
+          aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
+          aria-expanded={menuOpen}
+          aria-controls="main-menu"
+          onClick={() => setMenuOpen((open) => !open)}
+        >
+          <Icon name={menuOpen ? "close" : "menu"} />
+        </button>
       </Container>
     </header>
   );

@@ -6,14 +6,14 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export function MusicSection() {
   return (
-    <PageSection id="musique">
+    <PageSection id="musique" className="bg-[linear-gradient(#fbf9fc,#f5eff8)]">
       <Carousel
         label="Musique"
         heading={
           <SectionHeading
-            kicker="Sélection"
-            title="Musique"
-            description="Quelques créations à découvrir sur YouTube."
+            kicker="Musique"
+            title="Quelques titres"
+            description="Plongez dans l’univers de Jiphi à travers sa musique."
           />
         }
       >

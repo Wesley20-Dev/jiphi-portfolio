@@ -14,6 +14,11 @@
   --color-field-line: #d9c6e7;
   --color-media: #e8deee;
   --color-night: #261b30;
+  --color-lilac-bright: #ad79f4;
+  --color-lilac-soft: #d3a9ff;
+  --color-deep: #211333;
+  --color-deep-2: #20112f;
+  --color-mist: #f5eff8;
 
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 
@@ -49,7 +54,7 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 90px;
+    scroll-padding-top: 80px;
   }
 
   body {
