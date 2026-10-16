@@ -7,7 +7,17 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 export function EventsSection() {
   return (
     <PageSection id="evenements">
-      <Carousel label="Événements" variant="wide" heading={<SectionHeading kicker="Agenda" title="Événements" />}>
+      <Carousel
+        label="Événements"
+        variant="wide"
+        heading={
+          <SectionHeading
+            kicker="Événements"
+            title="Sur scène, bientôt"
+            description="Retrouvez les prochaines dates de Jiphi."
+          />
+        }
+      >
         {events.map((event) => (
           <EventCard key={event.id} event={event} />
         ))}
