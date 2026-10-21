@@ -1,6 +1,7 @@
 import type { NavLink, SocialLink, UniverseTag } from "@/types/content";
 
-export const HERO_IMAGE = "/images/jiphi-hero.jpg";
+export const HERO_IMAGE = "/images/hero_baner.jpg";
+export const HERO_IMAGE_MOBILE = "/images/hero_mobile_baner.jpg";
 
 export const siteConfig = {
   name: "Jiphi",

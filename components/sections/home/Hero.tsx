@@ -1,28 +1,39 @@
-import Image from "next/image";
-import { HERO_IMAGE, siteConfig } from "@/data/site";
+import { getImageProps } from "next/image";
+import { HERO_IMAGE, HERO_IMAGE_MOBILE, siteConfig } from "@/data/site";
 import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Icon } from "@/components/ui/Icon";
 
+// Art direction : bannière large sur desktop, version portrait dédiée sur mobile
+// (la bannière large, étirée en hauteur, devenait floue).
+const heroCommon = { alt: "", fill: true, sizes: "100vw", fetchPriority: "high" } as const;
+const {
+  props: { srcSet: desktopSrcSet },
+} = getImageProps({ ...heroCommon, src: HERO_IMAGE, quality: 80 });
+const {
+  props: { srcSet: mobileSrcSet, ...heroImgProps },
+} = getImageProps({ ...heroCommon, src: HERO_IMAGE_MOBILE, quality: 80 });
+
 export function Hero() {
   return (
-    <section id="accueil" className="relative isolate min-h-[680px] overflow-hidden bg-deep text-white md:min-h-[610px] lg:min-h-[min(760px,100svh)]">
-      <Image
-        src={HERO_IMAGE}
-        alt=""
-        fill
-        preload
-        sizes="100vw"
-        className="-z-20 animate-hero-zoom object-cover object-[59%_center] saturate-[.75] md:object-[center_42%]"
-      />
+    <section id="accueil" className="relative isolate min-h-[780px] overflow-hidden bg-deep text-white md:min-h-[610px] lg:min-h-[min(760px,100svh)]">
+      <picture>
+        <source media="(min-width: 768px)" srcSet={desktopSrcSet} />
+        <source srcSet={mobileSrcSet} />
+        {/* eslint-disable-next-line jsx-a11y/alt-text */}
+        <img
+          {...heroImgProps}
+          className="-z-20 animate-hero-zoom object-cover object-top saturate-[.75] md:object-[center_42%]"
+        />
+      </picture>
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,#140a22e8,#1b0d2b80_75%),linear-gradient(0deg,#150b22bd,transparent_60%)] md:bg-[linear-gradient(90deg,rgba(22,11,36,.94),rgba(30,14,45,.75)_32%,rgba(30,14,45,.14)_72%,rgba(25,12,40,.48)),linear-gradient(0deg,rgba(21,11,34,.6),transparent_48%),radial-gradient(circle_at_82%_15%,rgba(135,80,181,.35),transparent_35%)]"
+        className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(20,10,34,.45),transparent_18%,transparent_42%,rgba(20,10,34,.7)_56%,#140a22_80%)] md:bg-[linear-gradient(90deg,rgba(22,11,36,.94),rgba(30,14,45,.75)_32%,rgba(30,14,45,.14)_72%,rgba(25,12,40,.48)),linear-gradient(0deg,rgba(21,11,34,.6),transparent_48%),radial-gradient(circle_at_82%_15%,rgba(135,80,181,.35),transparent_35%)]"
       />
 
       {/* Animation au chargement en pur CSS : le hero est visible même avant l'hydratation. */}
-      <Container className="pb-[95px] pt-[188px] md:pb-[100px] md:pt-[157px]">
-        <div className="max-w-[600px]">
+      <Container className="flex justify-end pb-[70px] pt-[400px] md:pb-[100px] md:pt-[157px]">
+        <div className="max-w-[600px] mt-[30px]">
           <p className="flex animate-fade-up items-center gap-2.5 text-[11px] font-bold uppercase tracking-[.08em] text-lilac-bright [animation-delay:100ms] after:h-px after:w-[52px] after:bg-lilac-bright/45 after:content-['']">
             {siteConfig.genre}
           </p>
