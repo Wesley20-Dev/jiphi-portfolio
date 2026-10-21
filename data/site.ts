@@ -5,10 +5,11 @@ export const HERO_IMAGE = "/images/jiphi-hero.jpg";
 export const siteConfig = {
   name: "Jiphi",
   title: "Jiphi — Univers musical",
-  description: "Découvrez l’univers musical de Jiphi, artiste chanteur, interprète et instrumentaliste.",
+  description: "Découvrez le parcours et l’univers de Jiphi, chanteur, interprète et étudiant en musique.",
   tagline: "Univers musical",
   genre: "World Music",
-  role: "Artiste chanteur, interprète et instrumentaliste.",
+  // TODO: valider la formulation avec Jiphi.
+  role: "Chanteur, interprète et étudiant en musique.",
   motto:
     "La musique est une source d’inspiration et un métronome qui n’a ni race ni frontière.",
   // TODO: remplacer par les coordonnées réelles de Jiphi.
@@ -22,10 +23,9 @@ export const phoneHref = `tel:${siteConfig.phone.replace(/\s/g, "")}`;
 
 export const navLinks: NavLink[] = [
   { label: "Accueil", sectionId: "accueil" },
-  { label: "Musique", sectionId: "musique" },
+  { label: "Parcours", sectionId: "parcours" },
   { label: "Vidéos", sectionId: "videos" },
-  { label: "Événements", sectionId: "evenements" },
-  { label: "À propos", sectionId: "apropos" },
+  { label: "Galerie", sectionId: "galerie" },
   { label: "Contact", sectionId: "contact" },
 ];
 

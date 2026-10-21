@@ -1,18 +1,16 @@
-import { AboutPreview } from "@/components/sections/home/AboutPreview";
+import { AboutSection } from "@/components/sections/home/AboutSection";
 import { ContactSection } from "@/components/sections/home/ContactSection";
-import { EventsSection } from "@/components/sections/home/EventsSection";
+import { GallerySection } from "@/components/sections/home/GallerySection";
 import { Hero } from "@/components/sections/home/Hero";
-import { MusicSection } from "@/components/sections/home/MusicSection";
 import { VideosSection } from "@/components/sections/home/VideosSection";
 
 export default function HomePage() {
   return (
     <>
       <Hero />
-      <MusicSection />
+      <AboutSection />
       <VideosSection />
-      <EventsSection />
-      <AboutPreview />
+      <GallerySection />
       <ContactSection />
     </>
   );

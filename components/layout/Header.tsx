@@ -30,11 +30,6 @@ export function Header() {
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [menuOpen]);
 
-  function isActive(sectionId: string) {
-    if (isHome) return activeSection === sectionId;
-    return pathname === "/a-propos" && sectionId === "apropos";
-  }
-
   return (
     <header
       className={cn(
@@ -65,7 +60,7 @@ export function Header() {
           )}
         >
           {navLinks.map((link) => {
-            const active = isActive(link.sectionId);
+            const active = isHome && activeSection === link.sectionId;
             return (
               <Link
                 key={link.sectionId}

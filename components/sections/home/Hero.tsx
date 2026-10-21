@@ -36,12 +36,12 @@ export function Hero() {
             « {siteConfig.motto} »
           </p>
           <div className="flex max-w-[250px] animate-fade-up flex-col gap-3 [animation-delay:600ms] min-[391px]:max-w-none min-[391px]:flex-row min-[391px]:flex-wrap">
-            <ButtonLink href="/#musique">
-              <Icon name="play" className="text-[11px]" />
-              Écouter ma musique
-            </ButtonLink>
-            <ButtonLink href="/a-propos" variant="outline-light">
+            <ButtonLink href="/#parcours">
               Découvrir mon parcours
+              <Icon name="arrow-right" />
+            </ButtonLink>
+            <ButtonLink href="/#contact" variant="outline-light">
+              Me contacter
               <Icon name="arrow-up-right" />
             </ButtonLink>
           </div>

@@ -27,22 +27,6 @@ export type MediaItem = {
   imageAlt?: string;
 };
 
-export type EventItem = {
-  id: string;
-  label: string;
-  title: string;
-  meta: string;
-  description: string;
-  image: string;
-  imageAlt?: string;
-};
-
-export type Achievement = {
-  id: string;
-  title: string;
-  description: string;
-};
-
 export type GalleryImage = {
   id: string;
   src: string;
