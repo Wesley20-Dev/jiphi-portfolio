@@ -22,7 +22,7 @@ export function GalleryGrid({ images }: { images: GalleryImage[] }) {
   return (
     <>
       <div id={GRID_ID}>
-        <RevealList aria-label="Galerie photos" className="grid grid-cols-2 gap-2.5 md:grid-cols-4 md:gap-3.5">
+        <RevealList aria-label="Galerie photos" itemClassName="reveal-clip" className="grid grid-cols-2 gap-2.5 md:grid-cols-4 md:gap-3.5">
           {visible.map((photo, index) => (
             <button
               key={photo.id}

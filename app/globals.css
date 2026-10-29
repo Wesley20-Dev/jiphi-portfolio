@@ -25,6 +25,25 @@
   --animate-fade-up: fade-up 0.7s var(--ease-out-soft) both;
   --animate-hero-zoom: hero-zoom 1.6s var(--ease-out-soft) both;
   --animate-lightbox-in: lightbox-in 0.35s var(--ease-out-soft) both;
+  --animate-mask-up: mask-up 0.9s var(--ease-out-soft) both;
+  --animate-caret-blink: caret-blink 1s steps(1) infinite;
+
+  @keyframes mask-up {
+    from {
+      opacity: 0;
+      transform: translateY(105%);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes caret-blink {
+    50% {
+      opacity: 0;
+    }
+  }
 
   @keyframes lightbox-in {
     from {
@@ -106,6 +125,86 @@
     opacity: 1;
     transform: none;
   }
+
+  /* Images qui se dévoilent de bas en haut (clip-path) plutôt qu'en fondu. */
+  .reveal-item.reveal-clip {
+    opacity: 1;
+    transform: none;
+    clip-path: inset(100% 0 0 0);
+    transition: clip-path 1s var(--ease-out-soft) calc(var(--i, 0) * 90ms);
+  }
+
+  .reveal-group.is-visible .reveal-clip {
+    clip-path: inset(0);
+  }
+
+  /* Image qui se recadre doucement pendant l'apparition de son bloc. */
+  .reveal .reveal-zoom {
+    transform: scale(1.12);
+    transition: transform 1.6s var(--ease-out-soft);
+  }
+
+  .reveal.is-visible .reveal-zoom {
+    transform: none;
+  }
+
+  /* Mots qui montent derrière un masque (voir components/ui/SplitText.tsx). */
+  .reveal-mask .split-inner {
+    opacity: 0;
+    transform: translateY(105%);
+    transition:
+      opacity 0.9s var(--ease-out-soft),
+      transform 0.9s var(--ease-out-soft);
+  }
+
+  .reveal-mask.is-visible .split-inner {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Découpage en lettres ou en mots : chaque morceau glisse dans son propre masque. */
+@layer components {
+  .split-mask {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+    /* Marge intérieure pour ne pas rogner les jambages (p, J) ni les débords des serifs. */
+    padding: 0.14em 0.06em;
+    margin: -0.14em -0.06em;
+  }
+
+  .split-inner {
+    display: inline-block;
+  }
+
+  /* Machine à écrire (voir components/ui/Typewriter.tsx). */
+  .typewriter-rest {
+    opacity: 0;
+  }
+
+  .typewriter-caret {
+    position: relative;
+    display: inline-block;
+    width: 0;
+    transition: opacity 0.4s;
+  }
+
+  .typewriter-caret::after {
+    content: "";
+    position: absolute;
+    left: 0.06em;
+    bottom: -0.15em;
+    width: 2px;
+    height: 1.15em;
+    background: var(--color-lilac-bright);
+    animation: var(--animate-caret-blink);
+  }
+
+  .typewriter.is-done .typewriter-caret {
+    opacity: 0;
+    transition-delay: 1.6s;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -114,9 +213,20 @@
   }
 
   .reveal,
-  .reveal-item {
+  .reveal-item,
+  .reveal-mask .split-inner,
+  .reveal .reveal-zoom {
     opacity: 1;
     transform: none;
+    clip-path: none;
+  }
+
+  .typewriter-rest {
+    opacity: 1;
+  }
+
+  .typewriter-caret {
+    display: none;
   }
 
   *,

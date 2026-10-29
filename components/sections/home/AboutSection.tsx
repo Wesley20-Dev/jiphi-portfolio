@@ -20,7 +20,7 @@ export function AboutSection() {
             alt={aboutContent.portraitAlt}
             fill
             sizes="(max-width: 768px) 100vw, 540px"
-            className="object-cover object-[center_35%] saturate-[.85]"
+            className="reveal-zoom object-cover object-[center_35%] saturate-[.85]"
           />
         </div>
         <p className="absolute -left-1 bottom-5 -rotate-[5deg] rounded-xl bg-brand px-3.5 py-2.5 font-serif text-base italic text-white shadow-[0_8px_20px_#8750b55c] md:-left-3">

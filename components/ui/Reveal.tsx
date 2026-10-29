@@ -5,18 +5,28 @@ import { cn } from "@/lib/utils";
 
 type RevealProps = {
   children: ReactNode;
-  /** Si vrai, anime les descendants `.reveal-item` en cascade plutôt que le bloc lui-même. */
-  group?: boolean;
+  /**
+   * - `block` : le bloc entier apparaît ;
+   * - `group` : ses descendants `.reveal-item` apparaissent en cascade ;
+   * - `mask` : les morceaux d'un `<SplitText>` montent derrière leur masque.
+   */
+  variant?: "block" | "group" | "mask";
   /** Délai avant l'apparition, en millisecondes. */
   delay?: number;
   className?: string;
 };
 
+const variantClasses = {
+  block: "reveal",
+  group: "reveal-group",
+  mask: "reveal-mask",
+};
+
 /**
  * Fait apparaître son contenu (fondu + légère montée) quand il entre dans l'écran.
- * Les styles sont dans app/globals.css (.reveal, .reveal-group, .reveal-item).
+ * Les styles sont dans app/globals.css (.reveal, .reveal-group, .reveal-mask…).
  */
-export function Reveal({ children, group = false, delay = 0, className }: RevealProps) {
+export function Reveal({ children, variant = "block", delay = 0, className }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -41,7 +51,7 @@ export function Reveal({ children, group = false, delay = 0, className }: Reveal
   return (
     <div
       ref={ref}
-      className={cn(group ? "reveal-group" : "reveal", visible && "is-visible", className)}
+      className={cn(variantClasses[variant], visible && "is-visible", className)}
       style={delay ? ({ "--reveal-delay": `${delay}ms` } as CSSProperties) : undefined}
     >
       {children}
