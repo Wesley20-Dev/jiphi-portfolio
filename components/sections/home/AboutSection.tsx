@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { aboutContent } from "@/data/about";
-import { siteConfig, universeTags } from "@/data/site";
+import { universeTags } from "@/data/site";
 import { Icon } from "@/components/ui/Icon";
 import { PageSection } from "@/components/ui/PageSection";
 import { Reveal } from "@/components/ui/Reveal";
@@ -20,7 +20,7 @@ export function AboutSection() {
             alt={aboutContent.portraitAlt}
             fill
             sizes="(max-width: 768px) 100vw, 540px"
-            className="reveal-zoom object-cover object-[center_35%] saturate-[.85]"
+            className="reveal-zoom object-cover object-[center_25%]"
           />
         </div>
         <p className="absolute -left-1 bottom-5 -rotate-[5deg] rounded-xl bg-brand px-3.5 py-2.5 font-serif text-base italic text-white shadow-[0_8px_20px_#8750b55c] md:-left-3">
@@ -35,10 +35,7 @@ export function AboutSection() {
             <p key={paragraph}>{paragraph}</p>
           ))}
         </div>
-        <blockquote className="my-6 border-l-2 border-brand pl-4 font-serif text-lg italic leading-snug text-ink">
-          « {siteConfig.motto} »
-        </blockquote>
-        <ul aria-label="Univers musical" className="flex flex-wrap gap-2">
+        <ul aria-label="Univers musical" className="mt-6 flex flex-wrap gap-2">
           {universeTags.map((tag) => (
             <li
               key={tag.label}
