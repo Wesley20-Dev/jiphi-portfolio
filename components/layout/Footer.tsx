@@ -22,7 +22,7 @@ export function Footer() {
             <Link href="/#accueil" className="inline-block font-serif text-[31px] font-medium uppercase leading-[.9] tracking-[.04em]">
               {siteConfig.name}
               <small className="mt-[5px] block font-sans text-[8px] font-bold uppercase leading-[1.7] tracking-[.17em] text-[#d7b9f5]">
-                Artiste chanteur & instrumentaliste
+                Chanteur & interprète
               </small>
             </Link>
             <p className="mt-4 max-w-[240px] text-[11px] text-white/72">
@@ -72,8 +72,11 @@ export function Footer() {
             © {siteConfig.copyrightYear} {siteConfig.name}. Tous droits réservés.
           </p>
           <nav aria-label="Liens de bas de page" className="flex flex-wrap gap-[18px]">
-            <Link href="/a-propos" className={bottomLinkClasses}>
-              À propos
+            <Link href="/#parcours" className={bottomLinkClasses}>
+              Parcours
+            </Link>
+            <Link href="/#galerie" className={bottomLinkClasses}>
+              Galerie
             </Link>
             <Link href="/#contact" className={bottomLinkClasses}>
               Contact

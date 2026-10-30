@@ -15,7 +15,7 @@ type RevealListProps = {
 /** Liste dont les éléments apparaissent l'un après l'autre à l'entrée dans l'écran. */
 export function RevealList({ children, className, itemClassName, listRef, "aria-label": ariaLabel }: RevealListProps) {
   return (
-    <Reveal group>
+    <Reveal variant="group">
       <ul ref={listRef} aria-label={ariaLabel} className={cn("m-0 list-none p-0", className)}>
         {Children.toArray(children).map((child, index) => (
           <li

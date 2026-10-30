@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import { Reveal } from "./Reveal";
+import { SplitText } from "./SplitText";
 
 export type Tone = "light" | "dark";
 
@@ -45,9 +47,11 @@ export function SectionHeading({
   return (
     <div className={className}>
       <Kicker tone={tone}>{kicker}</Kicker>
-      <Heading className="mb-[5px] mt-2 font-serif text-[34px] font-medium leading-[1.08] tracking-[-.03em] md:text-[clamp(32px,3.6vw,44px)]">
-        {title}
-      </Heading>
+      <Reveal variant="mask">
+        <Heading className="mb-[5px] mt-2 font-serif text-[34px] font-medium leading-[1.08] tracking-[-.03em] md:text-[clamp(32px,3.6vw,44px)]">
+          <SplitText text={title} />
+        </Heading>
+      </Reveal>
       {description && (
         <p className={cn("max-w-[300px] text-xs md:max-w-none", tone === "dark" ? "text-white/65" : "text-muted")}>
           {description}

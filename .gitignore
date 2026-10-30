@@ -35,7 +35,7 @@ yarn-error.log*
 
 # vercel
 .vercel
-/jiphi-portfolio-maquette
+/jiphi-portfolio-*
 # typescript
 *.tsbuildinfo
 next-env.d.ts

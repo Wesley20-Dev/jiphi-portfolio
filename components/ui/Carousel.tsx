@@ -10,21 +10,16 @@ type CarouselProps = {
   heading: ReactNode;
   /** Nom accessible de la liste, ex. « Musique ». */
   label: string;
-  variant?: "card" | "wide";
   tone?: Tone;
   children: ReactNode;
 };
 
-const trackVariants = {
-  card: "auto-cols-[78%] gap-3.5 md:auto-cols-[calc((100%-36px)/3)] md:gap-[18px] lg:auto-cols-[calc((100%-54px)/4)]",
-  wide: "auto-cols-[92%] gap-3.5 md:auto-cols-[80%] md:gap-[22px] lg:auto-cols-[calc((100%-22px)/2)]",
-};
 
 type TrackState = { pages: number; page: number; atStart: boolean; atEnd: boolean };
 
 const initialState: TrackState = { pages: 1, page: 0, atStart: true, atEnd: false };
 
-export function Carousel({ heading, label, variant = "card", tone = "light", children }: CarouselProps) {
+export function Carousel({ heading, label, tone = "light", children }: CarouselProps) {
   const trackRef = useRef<HTMLUListElement>(null);
   const [state, setState] = useState(initialState);
 
@@ -110,10 +105,7 @@ export function Carousel({ heading, label, variant = "card", tone = "light", chi
       <RevealList
         listRef={trackRef}
         aria-label={label}
-        className={cn(
-          "no-scrollbar grid snap-x snap-mandatory grid-flow-col overflow-x-auto px-0.5 pb-4 pt-2",
-          trackVariants[variant],
-        )}
+        className="no-scrollbar grid snap-x snap-mandatory auto-cols-[78%] grid-flow-col gap-3.5 overflow-x-auto px-0.5 pb-4 pt-2 md:auto-cols-[calc((100%-36px)/3)] md:gap-[18px] lg:auto-cols-[calc((100%-54px)/4)]"
         itemClassName="min-w-0 snap-start"
       >
         {children}
