@@ -1,30 +1,70 @@
 "use client";
 
-import type { FormEvent, ReactNode } from "react";
+import { useState, type FormEvent, type ReactNode } from "react";
 import { buildContactMailto, cn } from "@/lib/utils";
 import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
 
+const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
+const WEB3FORMS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY;
+
 const inputClasses =
   "w-full rounded-[10px] border border-[#dcc6f14d] bg-white/5 px-[13px] py-3 text-[13px] text-white outline-none transition-colors placeholder:text-white/50 focus:border-[#c79aff] focus:bg-white/8";
+
+type Status = "idle" | "sending" | "success" | "error";
 
 type ContactFormProps = {
   email: string;
 };
 
-/** Ouvre la messagerie du visiteur avec un email pré-rempli (mailto). */
+/**
+ * Envoie le message via Web3Forms. Sans clé configurée, ouvre la messagerie
+ * du visiteur avec un email pré-rempli (mailto).
+ */
 export function ContactForm({ email }: ContactFormProps) {
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  const [status, setStatus] = useState<Status>("idle");
+  const [mailto, setMailto] = useState("");
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const data = new FormData(form);
     const field = (name: string) => String(data.get(name) ?? "").trim();
 
-    window.location.href = buildContactMailto({
-      to: email,
-      name: field("name"),
-      email: field("email"),
-      message: field("message"),
-    });
+    const message = { name: field("name"), email: field("email"), message: field("message") };
+    const fallback = buildContactMailto({ to: email, ...message });
+
+    if (!WEB3FORMS_KEY) {
+      window.location.href = fallback;
+      return;
+    }
+
+    setStatus("sending");
+    try {
+      const response = await fetch(WEB3FORMS_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        // Les clés servent d'intitulés dans l'email reçu ; « email » sert aussi d'adresse de réponse.
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          subject: `🎵 ${message.name} vous a écrit depuis votre site`,
+          from_name: "Site de Jiphi",
+          botcheck: data.get("botcheck") === "on",
+          Nom: message.name,
+          email: message.email,
+          Message: message.message,
+          "Reçu le": new Date().toLocaleString("fr-FR", { dateStyle: "full", timeStyle: "short" }),
+        }),
+      });
+      const result: { success?: boolean } = await response.json();
+      if (!result.success) throw new Error("Échec de l’envoi");
+
+      form.reset();
+      setStatus("success");
+    } catch {
+      setMailto(fallback);
+      setStatus("error");
+    }
   }
 
   return (
@@ -53,12 +93,27 @@ export function ContactForm({ email }: ContactFormProps) {
           className={cn(inputClasses, "min-h-[105px] resize-y")}
         />
       </Field>
-      <Button type="submit" className="justify-self-start md:col-span-2">
+      {/* Piège anti-spam : invisible pour les visiteurs, coché par les robots. */}
+      <input type="checkbox" name="botcheck" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
+      <Button
+        type="submit"
+        disabled={status === "sending"}
+        className="justify-self-start disabled:pointer-events-none disabled:opacity-60 md:col-span-2"
+      >
         <Icon name="send" />
-        Envoyer le message
+        {status === "sending" ? "Envoi en cours..." : "Envoyer le message"}
       </Button>
-      <p className="text-[11px] text-white/55 md:col-span-2">
-        Votre application de messagerie s’ouvrira pour envoyer l’email.
+      <p role="status" className="text-[11px] text-white/72 md:col-span-2">
+        {status === "success" && "Merci ! Votre message a bien été envoyé, je vous réponds au plus vite."}
+        {status === "error" && (
+          <>
+            L’envoi a échoué.{" "}
+            <a href={mailto} className="font-bold text-[#d8b8ff] underline underline-offset-2 hover:text-white">
+              Écrivez-moi directement par email
+            </a>
+            .
+          </>
+        )}
       </p>
     </form>
   );

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { HERO_IMAGE, phoneHref, siteConfig } from "@/data/site";
+import { HERO_IMAGE, phoneHref, siteConfig, whatsappHref } from "@/data/site";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { Icon, type IconName } from "@/components/ui/Icon";
 import { PageSection } from "@/components/ui/PageSection";
@@ -9,7 +9,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 const contactLinks: { label: string; href: string; icon: IconName }[] = [
   { label: siteConfig.email, href: `mailto:${siteConfig.email}`, icon: "mail" },
   { label: siteConfig.phone, href: phoneHref, icon: "phone" },
-  { label: "WhatsApp", href: siteConfig.whatsapp, icon: "whatsapp" },
+  { label: "WhatsApp", href: whatsappHref, icon: "whatsapp" },
 ];
 
 export function ContactSection() {

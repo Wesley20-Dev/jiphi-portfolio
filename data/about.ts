@@ -35,5 +35,5 @@ export const gallery: GalleryImage[] = [
   { id: "plateau-tv-2", src: `${GALLERY_DIR}/jiphi-02.jpg`, alt: "Jiphi souriant sur un plateau de télévision" },
   { id: "studio-guitare-2", src: `${GALLERY_DIR}/jiphi-17.jpg`, alt: "Jiphi chantant à la guitare, en noir et blanc" },
   { id: "radio-equipe-2", src: `${GALLERY_DIR}/jiphi-05.jpg`, alt: "Jiphi et l'équipe d'une radio posant ensemble" },
-  { id: "studio-micro", src: `${GALLERY_DIR}/jiphi-19.jpg`, alt: "Portrait de Jiphi au micro, en noir et blanc" },
+  // { id: "studio-micro", src: `${GALLERY_DIR}/jiphi-19.jpg`, alt: "Portrait de Jiphi au micro, en noir et blanc" },
 ];
