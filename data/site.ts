@@ -6,10 +6,10 @@ export const HERO_IMAGE_MOBILE = "/images/hero_mobile_baner.jpg";
 export const siteConfig = {
   name: "Jiphi",
   title: "Jiphi — Univers musical",
-  description: "Découvrez le parcours et l’univers de Jiphi, chanteur, interprète et étudiant en musique.",
+  description: "Découvrez le parcours et l’univers de Jiphi, chanteur et interprète qui baigne dans la World Music.",
   tagline: "Univers musical",
   genre: "World Music",
-  role: "Chanteur, interprète qui baigne faisant de la WORD music",
+  role: "Chanteur, interprète qui baigne dans la World Music.",
   motto:
     "La musique est une source d’inspiration et un métronome qui n’a ni race ni frontière.",
   email: "jeanphilippenehemiekouassi@gmail.com",
