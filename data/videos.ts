@@ -1,17 +1,34 @@
-import type { MediaItem } from "@/types/content";
-import { HERO_IMAGE } from "./site";
+import type { Video } from "@/types/content";
 
-// TODO: remplacer par les vraies vidéos et leurs miniatures.
-export const videos: MediaItem[] = [
+// Vidéos de la chaîne YouTube de Jiphi, en attendant des captations de meilleure qualité.
+export const videos: Video[] = [
   {
-    id: "performance-live",
-    title: "Performance live",
-    meta: "Concert · Performance",
-    href: "https://youtube.com/",
-    image: HERO_IMAGE,
-    imageAlt: "Jiphi en pleine performance",
+    youtubeId: "CWYTopy82Sg",
+    title: "The Voice Afrique",
+    meta: "Télé · Auditions à l'aveugle",
+    // La miniature YouTube montre son entourage : on garde Jiphi au micro.
+    poster: "/images/videos/the-voice.jpg",
+    landscape: true,
   },
-  { id: "session-musicale", title: "Session musicale", meta: "Musique · Création", href: "https://youtube.com/" },
-  { id: "rencontre", title: "Rencontre", meta: "Interview", href: "https://youtube.com/" },
-  { id: "coulisses", title: "Dans les coulisses", meta: "Behind the scenes", href: "https://youtube.com/" },
+  {
+    youtubeId: "62tMckThdhE",
+    title: "Concert de Tiken Jah Fakoly",
+    meta: "Concert · Chœur de 500 voix",
+  },
+  {
+    youtubeId: "GoFJmhbQFhY",
+    title: "MiWA en a cappella",
+    meta: "Live · Life Radio",
+  },
+  {
+    youtubeId: "m9b-eubXcVc",
+    title: "Chante ton kiff",
+    meta: "Télé · NCI",
+  },
+  {
+    youtubeId: "LYSTRPaRS4E",
+    title: "Ayoka",
+    meta: "Reprise · Dobet Gnahoré",
+    landscape: true,
+  },
 ];

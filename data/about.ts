@@ -1,15 +1,14 @@
 import type { GalleryImage } from "@/types/content";
-import { HERO_IMAGE } from "./site";
 
 export const aboutContent = {
-  portrait: HERO_IMAGE,
-  portraitAlt: "Jiphi avec sa guitare",
+  portrait: "/images/jiphi-about.jpg",
+  portraitAlt: "Jiphi dans les coulisses de The Voice Afrique Francophone",
   stamp: "La musique nous rassemble",
-  title: "Une voix, une vision.",
-  // TODO: remplacer par le texte de Jiphi sur son parcours et son univers.
+  title: "Une voix qui relie.",
   bio: [
-    "Jiphi est chanteur et interprète. Étudiant en musique, il construit son parcours entre apprentissage, scène et rencontres, porté par une curiosité pour les musiques du monde.",
-    "À travers ses interprétations, il invite chacun à voyager, à ressentir et à découvrir une musique sans frontières.",
+    "De son vrai nom Kouassi Jean Philippe Néhémie, Jiphi est chanteur et interprète, installé à Abidjan. Ce qui le fascine dans la musique, c’est autant le son que ce qu’elle relie : les gens, les mémoires, les cultures.",
+    "Formé au Conservatoire d’Abengourou, il décroche ensuite une licence en musique et musicologie à l’Université Félix Houphouët-Boigny, où il explore ce qui unit la musique, la société et la psychologie.",
+    "Guitare, voix, djembé : c’est avec ces trois compagnons qu’il trace sa route. Elle l’a mené sur la scène de The Voice Afrique Francophone, puis aux côtés de Tiken Jah Fakoly, comme choriste lors de l’un de ses concerts. Et bien d’autres rencontres, à découvrir dans la galerie.",
   ],
 } as const;
 

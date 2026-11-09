@@ -17,14 +17,15 @@ export type UniverseTag = {
   icon: IconName;
 };
 
-export type MediaItem = {
-  id: string;
+export type Video = {
+  /** Identifiant YouTube, ex. « 62tMckThdhE » dans youtube.com/watch?v=62tMckThdhE. */
+  youtubeId: string;
   title: string;
   meta: string;
-  href: string;
-  /** Sans image, la carte affiche un dégradé avec le titre. */
-  image?: string;
-  imageAlt?: string;
+  /** Aperçu choisi à la main, à la place de la miniature YouTube. */
+  poster?: string;
+  /** Vidéo au format paysage (16:9). Par défaut : format vertical des Shorts. */
+  landscape?: boolean;
 };
 
 export type GalleryImage = {
