@@ -1,8 +1,7 @@
 import { videos } from "@/data/videos";
-import { Carousel } from "@/components/ui/Carousel";
-import { MediaCard } from "@/components/ui/MediaCard";
 import { PageSection } from "@/components/ui/PageSection";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { VideoCarousel } from "./VideoCarousel";
 
 export function VideosSection() {
   return (
@@ -16,22 +15,17 @@ export function VideosSection() {
       >
         Jiphi
       </span>
-      <Carousel
-        label="Vidéos"
-        tone="dark"
+      <VideoCarousel
+        videos={videos}
         heading={
           <SectionHeading
             kicker="Vidéos"
             title="À découvrir"
-            description="Concerts, coulisses, interviews et moments de création."
+            description="Concerts, radio, télé et moments de création."
             tone="dark"
           />
         }
-      >
-        {videos.map((video) => (
-          <MediaCard key={video.id} item={video} ctaLabel="Voir la vidéo" tone="dark" />
-        ))}
-      </Carousel>
+      />
     </PageSection>
   );
 }

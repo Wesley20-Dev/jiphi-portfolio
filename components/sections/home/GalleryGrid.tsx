@@ -60,7 +60,26 @@ export function GalleryGrid({ images }: { images: GalleryImage[] }) {
         </div>
       )}
 
-      <Lightbox images={images} index={openIndex} onIndexChange={setOpenIndex} onClose={() => setOpenIndex(null)} />
+      <Lightbox
+        items={images}
+        index={openIndex}
+        onIndexChange={setOpenIndex}
+        onClose={() => setOpenIndex(null)}
+        label="Visionneuse de photos"
+        itemLabel="Photo"
+        renderItem={(image) => (
+          <Image
+            key={image.id}
+            src={image.src}
+            alt={image.alt}
+            fill
+            sizes="100vw"
+            draggable={false}
+            className="animate-lightbox-in object-contain px-4 py-2 md:px-24 md:py-4"
+          />
+        )}
+        caption={(image) => image.alt}
+      />
     </>
   );
 }
